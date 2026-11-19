@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="FormatX is a local workspace for converting, merging, editing, and compressing documents.">
+<title>FormatX — The document workshop</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+<script defer src="{{ url_for('static',filename='app.js') }}"></script>
+</head>
+<body data-file-mib="{{ file_mib }}" data-request-mib="{{ request_mib }}">
+<a class="skip" href="#tools">Skip to document tools</a>
+<header class="top"><div class="wrap head">
+<a href="/" class="brand" aria-label="FormatX home"><span class="mark" aria-hidden="true">X</span>Format<span>X</span></a>
+<nav aria-label="Main navigation"><a href="#tools">All tools</a><a class="how" href="#how">How it works</a></nav>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="title">
+<div class="hero-copy"><span class="kicker flag">THE DOCUMENT WORKSHOP</span>
+<h1 id="title">A better place<br>for your <em>files.</em></h1>
+<p>Convert, combine, and tidy up your documents in one workspace.</p>
+<a class="hero-button" href="#tools">Explore the tools <span aria-hidden="true">↓</span></a></div>
+<div class="scenery" aria-hidden="true"><div class="peak peak-left"></div><div class="peak peak-right"></div><div class="fold fold-left"></div><div class="fold fold-right"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="paper paper-left"><i></i><i></i><i></i></div><div class="paper paper-right"><i></i><i></i><i></i></div></div>
+<div class="palette" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+<section class="wrap library" id="tools" aria-labelledby="tools-title">
+<div class="section-title"><div><span class="kicker eyebrow">THE TOOLKIT</span><h2 id="tools-title">Pick a tool</h2></div><p>Files are processed on the machine running FormatX and aren’t kept after processing.</p></div>
+<div class="grid">
+{% for id, title, desc, icon, color in tools %}
+<button class="card" type="button" data-tool="{{ id }}"><span class="icon {{ color }}" aria-hidden="true">{{ icon }}</span><span class="arrow" aria-hidden="true">↗</span><span class="card-title">{{ title }}</span><span class="card-desc">{{ desc }}</span></button>
+{% endfor %}
+</div>
+<noscript><p>Enable JavaScript to upload and process files in FormatX.</p></noscript>
+</section>
+<section class="how-section" id="how"><div class="wrap"><span class="kicker eyebrow">FROM UPLOAD TO DOWNLOAD</span><h2>How it works</h2><ol><li><strong>Pick a tool</strong><span>Choose the task that fits your file.</span></li><li><strong>Add your files</strong><span>Drop in a document and choose your settings.</span></li><li><strong>Save your result</strong><span>Download a new file. Your original stays untouched.</span></li></ol></div></section>
+</main>
+<footer><div class="wrap footer-inner"><a class="brand" href="/">Format<span>X</span></a><span>The document workshop</span></div></footer>
+<dialog id="workspace" aria-labelledby="work-title">
+<div class="dialog-head"><div><div class="kicker eyebrow">FORMATX WORKSPACE</div><h2 id="work-title"></h2><p id="work-desc"></p></div><button class="close" id="close" type="button" aria-label="Close workspace">×</button></div>
+<form id="work-form">
+<div id="settings"></div>
+<div id="drop" class="drop"><label for="upload"><strong>Choose files</strong> <span>or drag and drop here</span></label><input type="file" id="upload" aria-describedby="file-help"><small id="file-help"></small></div>
+<ol id="file-list" class="files" aria-label="Selected files in processing order"></ol>
+<div id="options"></div>
+<div class="actions"><button id="run" class="primary" type="submit">Process file</button><button id="cancel" class="secondary" type="button" hidden>Cancel request</button><a id="download" class="secondary download" hidden>Download result ↓</a></div>
+<progress id="progress" aria-label="Upload or processing progress" hidden></progress>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div id="preview" hidden><div class="preview-controls"><button type="button" id="prev" class="secondary">← Previous</button><span id="page-label"></span><button type="button" id="next" class="secondary">Next →</button></div><img id="preview-img" alt="Document page preview"></div>
+</form>
+</dialog>
+</body></html>
